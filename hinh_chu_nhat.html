@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p id="chuvi"></p>
+<p id="dientich"></p>
+<canvas id="myCanvas" width="1368px" height="768px" style="border:1px solid #d3d3d3;"></canvas>
+<script>
+    class Rectangle {
+        constructor(width, height) {
+            this.width = width;
+            this.height = height;
+        }
+
+        getArea() {
+            return this.height * this.width;
+        }
+
+        getChu_vi() {
+            return (this.width + this.height) * 2;
+        }
+
+        drawCanvas() {
+            let c = document.getElementById("myCanvas");
+            let ctx = c.getContext("2d");
+            ctx.beginPath();
+            ctx.fillStyle = "#10324b";
+            ctx.fillRect(50, 50, this.height, this.width);
+            ctx.fill();
+        }
+    }
+
+    let showResult = new Rectangle(50, 120);
+    document.getElementById("chuvi").innerHTML = " chu vi HCN la: " + showResult.getChu_vi();
+    document.getElementById("dientich").innerHTML = " dien tich HCN la: " + showResult.getArea();
+    showResult.drawCanvas();
+</script>
+</body>
+</html>
