@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<table>
+    <tr>
+        <td> Iphone13</td>
+        <td> SamSung NOTE 20</td>
+    </tr>
+
+    <tr>
+        <td>
+            <input type="text" id="iptMess1">
+            <button onclick="sendMess()"> Gửi </button>
+        </td>
+        <td>
+            <input type="text">
+            <button> Gửi </button>
+        </td>
+    </tr>
+
+    <tr>
+        <td id="inbox1"> Inbox Iphone </td>
+        <td id="inbox2"> Inbox SamSung </td>
+    </tr>
+
+</table>
+<script>
+    class Mobile {
+        constructor(name) {
+            this.name = name;
+            this.battery = 100;
+            this.draff = "";
+            this.inbox = [];
+            this.outbox = [];
+            this.status = true;
+        }
+
+        checkStatus() {
+            return this.status;
+        }
+
+        on_off() {
+            this.status = !this.status;
+        }
+
+        battery_charger() {
+            this.battery = this.battery + 5;
+        }
+
+        writeMessage(text) {
+            if (this.status) {
+                this.draff = text;
+                this.battery--;
+            }
+        }
+
+        sendMessage(phone) {
+            if (this.status) {
+                phone.inbox.push(this.draff);
+                this.outbox.push(this.draff);
+                this.draff = ""
+                this.battery--;
+            }
+        }
+
+        getInbox() {
+            if (this.status) {
+                this.battery--;
+                return this.inbox;
+
+            }
+        }
+
+        getOutbox() {
+            if (this.status) {
+                this.battery--;
+                return this.outbox;
+            }
+        }
+    }
+
+    let Iphone = new Mobile("Iphone13");
+    let Samsung = new Mobile("note20");
+
+    function sendMess(){
+        let mess = document.getElementById("iptMess1").value;
+        Iphone.writeMessage(mess);
+        Iphone.sendMessage(Samsung);
+        let inboxSamSung = Samsung.inbox.join("-");
+        document.getElementById("inbox2").innerText = inboxSamSung;
+    }
+
+</script>
+
+</body>
+</html>
